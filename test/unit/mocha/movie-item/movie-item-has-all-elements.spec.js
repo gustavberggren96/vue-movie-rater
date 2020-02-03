@@ -1,5 +1,4 @@
-const fs = require('fs');
-const path = require('path');
+/* eslint-disable no-undef */
 const assert = require('chai').assert;
 const parse5 = require('parse5');
 const helpers = require("../helpers")
