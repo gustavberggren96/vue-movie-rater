@@ -2,7 +2,7 @@
   <div>
     <h1>{{ title }}</h1>
     <ul>
-      <movie-item v-for="movie in movies" :key='movie.id' :movie='movie'></movie-item>
+      <movie-item v-for="movie in movies" :key='movie.id' :movie='movie' v-on:change-fav="changeFav"></movie-item>
     </ul>
     <hr>
   </div>
@@ -25,6 +25,12 @@ export default {
         {id: 5, title: 'Test Movie 2', favourite: true},
         {id: 6, title: 'Test Movie 3', favourite: false},
       ]
+    }
+  },
+  methods: {
+    changeFav(id) {
+      const m = this.movies.find(d => d.id === id);
+      m.favourite = !m.favourite;
     }
   }
 }

@@ -7,7 +7,7 @@
         slot="cover"
       />
       <template class="ant-card-actions" slot="actions">
-        <a-icon type="star" :theme="movie.favourite ? 'filled' : 'outlined'" />
+          <a-icon  @click="$emit('change-fav', movie.id)" type="star" :theme="movie.favourite ? 'filled' : 'outlined'" />
       </template>
       <a-card-meta :title="movie.title">
       </a-card-meta>
@@ -19,7 +19,12 @@ export default {
   name: 'MovieItem',
   props: [
     'movie'
-  ]
+  ],
+  methods: {
+    test() {
+      print("test")
+    }
+  }
 }
 </script>
 <style>
