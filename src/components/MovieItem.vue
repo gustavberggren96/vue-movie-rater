@@ -1,28 +1,35 @@
 <template>
   <li>
-    <a-card hoverable style="width: 300px">
+    <a-card style="width: 300px">
       <img
         alt="example"
         src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
         slot="cover"
+        @click="$router.push('/movies/'+movie.id)"
       />
-      <template class="ant-card-actions" slot="actions">
-          <a-icon  @click="$emit('change-fav', movie.id)" type="star" :theme="movie.favourite ? 'filled' : 'outlined'" />
-      </template>
-      <a-card-meta :title="movie.title">
+      
+      <a-card-meta 
+        :title="movie.title"
+        @click="$router.push('/movies/'+movie.id)"
+      >
       </a-card-meta>
+      <template class="ant-card-actions" slot="actions">
+          <a-icon  @click="addToFavourites(movie.id)" type="star" :theme="movie.favourite ? 'filled' : 'outlined'" />
+      </template>
     </a-card>
   </li>
 </template>
 <script>
+import { mapActions } from 'vuex';
 export default {
   name: 'MovieItem',
   props: [
     'movie'
   ],
   methods: {
+    ...mapActions(['addToFavourites']),
     test() {
-      print("test")
+      //
     }
   }
 }

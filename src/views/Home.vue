@@ -1,21 +1,17 @@
 <template>
   <div id="app">
-    <Header />
-    <div id="nav">
-      <router-link to="/">Home</router-link>
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+    <img alt="Vue logo" src="../assets/logo.png">
+    <movie-list title="Test" />
   </div>
 </template>
 
 <script>
-import Header from './components/layouts/Header';
+import MovieList from '../components/MovieList.vue'
+
 export default {
-  name: 'app',
+  name: 'Home',
   components: {
-    Header,
-    
+    MovieList
   }
 }
 </script>
@@ -28,10 +24,5 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-}
-
-#nav {
-  display: block;
-  
 }
 </style>
