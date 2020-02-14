@@ -14,7 +14,12 @@
       >
       </a-card-meta>
       <template class="ant-card-actions" slot="actions">
-          <a-icon  @click="addToFavourites(movie.id)" type="star" :theme="movie.favourite ? 'filled' : 'outlined'" />
+          <a-icon  
+            @click="addToFavourites(movie.id)"
+            type="star"
+            :theme="movie.favourite ? 'filled' : 'outlined'"
+            :style="movie.favourite ? { fontSize: '16px', color: '#08c' } : {}"
+          />
       </template>
     </a-card>
   </li>
