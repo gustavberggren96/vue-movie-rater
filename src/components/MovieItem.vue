@@ -3,7 +3,7 @@
     <a-card style="width: 300px">
       <img
         alt="example"
-        src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png"
+        :src="movie.posterurl"
         slot="cover"
         @click="$router.push('/movies/'+movie.id)"
       />

@@ -1,4 +1,7 @@
-//import axios from 'axios';
+//import Axios from "axios";
+
+
+import axios from 'axios';
 
 const state = {
   movies: []
@@ -10,16 +13,23 @@ const getters = {
 
 const actions = {
   async fetchMovies({ commit }) {
+    const response = await axios.get('http://localhost:8080/api/v1/movies');
     // TODO: get movies with axios call to spring application
-
-    const temp = [
+    const temp = response.data.map(m => {
+      m.id = m.movieId;
+      delete m.movieId;
+      return m;
+    })
+    // eslint-disable-next-line no-console
+    console.log(temp);
+    /*const temp = [
         {id: 1, title: 'Test Movie 1', favourite: false},
         {id: 2, title: 'Test Movie 2', favourite: true},
         {id: 3, title: 'Test Movie 3', favourite: false},
         {id: 4, title: 'Test Movie 1', favourite: false},
         {id: 5, title: 'Test Movie 2', favourite: true},
         {id: 6, title: 'Test Movie 3', favourite: false},
-    ];
+    ];*/
     commit('setMovies', temp)
   },
 
