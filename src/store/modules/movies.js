@@ -4,11 +4,13 @@
 import axios from 'axios';
 
 const state = {
-  movies: []
+  movies: [],
+  movie: [],
 };
 
 const getters = {
-  allMovies: (state) => state.movies
+  allMovies: (state) => state.movies,
+  getMovie: (state) => state.movie,
 };
 
 const actions = {
@@ -37,11 +39,16 @@ const actions = {
 
     commit('setFavourite', id);
 
-  }
+  },
   
-  /*async fetchMovieData({ commit }) {
-    //
-  }*/
+  async fetchMovieData({ commit }, id) {
+    const response = await axios.get(`http://localhost:8080/api/v1/movies/${id}/cached`);
+    const movie = response.data;
+    const sum = movie.ratings.reduce((a, b) => a + b, 0);
+    const avg = (sum / movie.ratings.length) || 0;
+    movie.averageRating = avg;
+    commit('setSelectedMovie', movie);
+  }
 };
 
 const mutations = {
@@ -49,7 +56,8 @@ const mutations = {
   setFavourite: (state, id) => {
     const m = state.movies.find(d => d.id === id);
     m.favourite = !m.favourite;
-  }
+  },
+  setSelectedMovie: (state, movie) => (state.movie = movie)
 };
 
 export default {

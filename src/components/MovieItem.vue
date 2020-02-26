@@ -6,6 +6,7 @@
         :src="movie.posterurl"
         slot="cover"
         @click="$router.push('/movies/'+movie.id)"
+        height="400 px"
       />
       
       <a-card-meta 

@@ -1,15 +1,13 @@
 <template>
 <div>
-  <h3>Movie Title</h3>
-  <h1>{{ $route.params.id}}</h1>
-  <MovieDescription />
+  <MovieDescription :id="$route.params.id" />
 </div>
 </template>
 
 <script>
 import MovieDescription from '../components/MovieDescription'
 export default {
-  name: "Movie",
+  name: "Movie", 
   components: {
     MovieDescription
   }
