@@ -5,13 +5,13 @@
         alt="example"
         :src="movie.posterurl"
         slot="cover"
-        @click="$router.push('/movies/'+movie.id)"
+        @click="this.test"
         height="400 px"
       />
       
       <a-card-meta 
         :title="movie.title"
-        @click="$router.push('/movies/'+movie.id)"
+        @click="this.test"
       >
       </a-card-meta>
       <template class="ant-card-actions" slot="actions">
@@ -33,9 +33,12 @@ export default {
     'movie'
   ],
   methods: {
-    ...mapActions(['addToFavourites']),
+    ...mapActions(['addToFavourites', 'clearMovieData']),
     test() {
-      //
+      // eslint-disable-next-line no-console
+      console.log("Test");
+      this.clearMovieData();
+      this.$router.push('/movies/'+this.movie.id);
     }
   }
 }

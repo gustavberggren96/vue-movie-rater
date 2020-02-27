@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Title</h1>
     <ul>
       <movie-item v-for="movie in allMovies" :key='movie.id' :movie='movie' v-on:change-fav="changeFav"></movie-item>
     </ul>

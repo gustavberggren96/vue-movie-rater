@@ -1,25 +1,34 @@
 <template>
   <div>
-    <a-collapse :bordered="false">
-      <h1 >{{ this.getMovie && this.getMovie.title ? this.getMovie.title : "No" }}</h1>
+    <div v-if="this.getMovie && this.getMovie.loading">
+      <a-spin />
+    </div>
+    <div  v-else>
+      <h1 >{{ this.getMovie.title }}</h1>
+      <a-rate :defaultValue="2.5" :value=getMovie.averageRating :count=10 disabled  allowHalf/>
+      <h2>{{ this.getMovie.year }}</h2>
       <img :src="this.getMovie.posterurl">
-      <a-collapse-panel header="Genres">
-        <ul>
-          <li v-for="(genre, index) in getMovie.genres" :key="`genre-${index}`">
-            {{genre}}
-          </li>
-        </ul>
-      </a-collapse-panel>
-      <a-collapse-panel header="Actors">
-        <ul>
-          <li v-for="(actor, index) in getMovie.actors" :key="`actor-${index}`">
-            {{actor}}
-          </li>
-        </ul>
-      </a-collapse-panel>
-    </a-collapse>
-    <a-rate :defaultValue="2.5" :value=getMovie.averageRating :count=10 disabled  allowHalf/>
-        
+      <a-divider>Storyline</a-divider>
+      <p>{{ this.getMovie.storyline}}</p>
+      <a-divider />
+      <a-collapse :bordered="false" class="wrapper">
+        <a-collapse-panel header="Genres">
+          <ul class="colapse">
+            <li v-for="(genre, index) in getMovie.genres" :key="`genre-${index}`">
+              {{genre}}
+            </li>
+          </ul>
+        </a-collapse-panel>
+        <a-collapse-panel header="Actors">
+          <ul>
+            <li v-for="(actor, index) in getMovie.actors" :key="`actor-${index}`">
+              {{actor}}
+            </li>
+          </ul>
+        </a-collapse-panel>
+      </a-collapse>
+      
+    </div>
   </div>
 </template>
 
@@ -56,5 +65,18 @@ export default {
 </script>
 
 <style>
+.wrapper{
+  text-align: center;
+}
+.wrapper .ul{
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.wrapper .li{
+  float: left;
+  padding: 2px 5px;
+  border: 1px solid black;
+}
 
 </style>
