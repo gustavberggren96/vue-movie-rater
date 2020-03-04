@@ -3,10 +3,10 @@
     <h1 id="title">Movie Rater App</h1>
     <div>
       <a-menu mode="horizontal" theme="dark" id="nav">
-        <a-menu-item>
+        <a-menu-item key="1">
           <router-link to="/">Home</router-link>
         </a-menu-item>
-        <a-menu-item>
+        <a-menu-item key="2">
           <router-link to="/about">About</router-link>
         </a-menu-item>
       </a-menu>

@@ -1,16 +1,16 @@
-//import Axios from "axios";
-
-
 import axios from 'axios';
+import _ from "lodash";
 
 const state = {
   movies: [],
   selectedMovie: {loading: true},
+  filteredMovies:[],
 };
 
 const getters = {
   allMovies: (state) => state.movies,
   getMovie: (state) => state.selectedMovie,
+  getFilteredMovies: (state) => state.filteredMovies,
 };
 
 const actions = {
@@ -35,6 +35,7 @@ const actions = {
     console.log("Fetch movie data");
     const response = await axios.get(`http://localhost:8080/api/v1/movies/${id}/cached`);
     const movie = {...response.data};
+    // calculate average rating
     const sum = movie.ratings.reduce((a, b) => a + b, 0);
     const avg = (sum / movie.ratings.length) || 0;
     movie.averageRating = avg;
@@ -43,6 +44,13 @@ const actions = {
   },
   async clearMovieData({ commit }) {
     commit('setSelectedMovie', {loading: true});
+  },
+  async filteredSearch({ commit }, input) {
+    const searchFilter = movie => {
+      return movie.title.toLowerCase().match(input.toLowerCase());
+    };
+    const filtered = _.filter(state.movies, searchFilter);
+    commit('setFilteredMovies', filtered);
   }
 };
 
@@ -52,7 +60,8 @@ const mutations = {
     const m = state.movies.find(d => d.id === id);
     m.favourite = !m.favourite;
   },
-  setSelectedMovie: (state, selectedMovie) => (state.selectedMovie = selectedMovie)
+  setSelectedMovie: (state, selectedMovie) => (state.selectedMovie = selectedMovie),
+  setFilteredMovies: (state, filteredMovies) => (state.filteredMovies = filteredMovies)
 };
 
 export default {

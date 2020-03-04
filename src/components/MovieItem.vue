@@ -1,7 +1,8 @@
 <template>
   <li>
-    <a-card style="width: 300px">
+    <a-card id="card" hoverable style="width: 300px; cursor: default;">
       <img
+        style="cursor: pointer;"
         alt="example"
         :src="movie.posterurl"
         slot="cover"
@@ -10,11 +11,12 @@
       />
       
       <a-card-meta 
+        style="cursor: pointer;"
         :title="movie.title"
         @click="this.test"
       >
       </a-card-meta>
-      <template class="ant-card-actions" slot="actions">
+      <template id="actions" class="ant-card-actions" slot="actions">
           <a-icon  
             @click="addToFavourites(movie.id)"
             type="star"
@@ -48,5 +50,9 @@ export default {
     float: left;
     margin: 10px 10px;
     padding: 10px 10px;
+  }
+  #actions:hover{
+      cursor: default;
+    
   }
 </style>

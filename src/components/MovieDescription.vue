@@ -1,15 +1,15 @@
 <template>
   <div>
-    <div v-if="this.getMovie && this.getMovie.loading">
+    <div id="spinner" v-if="this.getMovie && this.getMovie.loading">
       <a-spin />
     </div>
     <div  v-else>
       <h1 >{{ this.getMovie.title }}</h1>
-      <a-rate :defaultValue="2.5" :value=getMovie.averageRating :count=10 disabled  allowHalf/>
+      <a-rate :defaultValue="0" :value=getMovie.averageRating :count=10 disabled  allowHalf/>
       <h2>{{ this.getMovie.year }}</h2>
       <img :src="this.getMovie.posterurl">
       <a-divider>Storyline</a-divider>
-      <p>{{ this.getMovie.storyline}}</p>
+      <p class="storyline">{{ this.getMovie.storyline}}</p>
       <a-divider />
       <a-collapse :bordered="false" class="wrapper">
         <a-collapse-panel header="Genres">
@@ -65,8 +65,12 @@ export default {
 </script>
 
 <style>
+#spinner{
+  padding: 10%;
+}
 .wrapper{
   text-align: center;
+
 }
 .wrapper .ul{
   display: inline-block;
@@ -77,6 +81,12 @@ export default {
   float: left;
   padding: 2px 5px;
   border: 1px solid black;
+}
+
+.storyline{
+  padding-left: 15%;
+  padding-right: 15%; 
+  text-align: left;
 }
 
 </style>
